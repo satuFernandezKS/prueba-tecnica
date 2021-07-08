@@ -13,7 +13,7 @@ CREATE TABLE PRICES
     LAST_UPDATE    TIMESTAMP,
     LAST_UPDATE_BY VARCHAR
 )
-    AS
+AS
 SELECT BrandId,
        convert(parseDateTime(StartDate, 'yyyy-MM-dd-hh.mm.ss'), timestamp),
        convert(parseDateTime(EndDate, 'yyyy-MM-dd-hh.mm.ss'), timestamp),
