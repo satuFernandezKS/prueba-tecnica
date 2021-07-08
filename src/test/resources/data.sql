@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS PRICES;
 
 CREATE TABLE PRICES
 (
+    ID             IDENTITY NOT NULL AUTO_INCREMENT,
     BRAND_ID       INT,
     START_DATE     TIMESTAMP,
     END_DATE       TIMESTAMP,
@@ -12,16 +13,4 @@ CREATE TABLE PRICES
     CURRENCY       VARCHAR,
     LAST_UPDATE    TIMESTAMP,
     LAST_UPDATE_BY VARCHAR
-)
-AS
-SELECT BrandId,
-       convert(parseDateTime(StartDate, 'yyyy-MM-dd-hh.mm.ss'), timestamp),
-       convert(parseDateTime(EndDate, 'yyyy-MM-dd-hh.mm.ss'), timestamp),
-       PriceList,
-       ProductId,
-       Priority,
-       Price,
-       Currency,
-       convert(parseDateTime(LastUpdate, 'yyyy-MM-dd-hh.mm.ss'), timestamp),
-       LastUpdateBy
-FROM CSVREAD('src/test/resources/prices.csv');
+);

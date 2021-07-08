@@ -1,5 +1,6 @@
 package com.satufernandezks.pruebatecnica.infrastructure.repository;
 
+import com.satufernandezks.pruebatecnica.domain.data.PricesDomain;
 import com.satufernandezks.pruebatecnica.infrastructure.entities.PricesEntity;
 import com.satufernandezks.pruebatecnica.infrastructure.repository.impl.PricesRepositoryImpl;
 import org.junit.Assert;
@@ -14,8 +15,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -57,7 +58,12 @@ public class PricesRepositoryTest {
     @Test
     public void test_getPriceNotFound() {
 
-        PricesEntity pricesEntityResult = pricesRepository.getPrice(any(LocalDateTime.class), anyInt(), anyInt());
+        PricesDomain pricesDomain = mock(PricesDomain.class);
+        when(pricesDomain.getApplicationDate()).thenReturn(LocalDateTime.now());
+        when(pricesDomain.getProductId()).thenReturn(35455);
+        when(pricesDomain.getBrandId()).thenReturn(1);
+        PricesEntity pricesEntityResult = pricesRepository.getPrice(pricesDomain.getApplicationDate(),
+                pricesDomain.getProductId(), pricesDomain.getBrandId());
         Assert.assertNull(pricesEntityResult);
     }
 }

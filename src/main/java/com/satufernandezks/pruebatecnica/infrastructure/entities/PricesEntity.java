@@ -9,7 +9,7 @@ import java.util.Objects;
 public class PricesEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "BRAND_ID")
