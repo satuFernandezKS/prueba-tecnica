@@ -19,7 +19,7 @@ public class PricesJpaAdapter implements PricesPersistencePort {
 
     @Override
     public Optional<PricesDomain> getPrice(final PricesDomain pricesDomain) {
-        final PricesEntity pricesEntity = pricesRepository.getPrice(pricesDomain.getApplicationDate(),
+        final var pricesEntity = pricesRepository.getPrice(pricesDomain.getApplicationDate(),
                 pricesDomain.getProductId(), pricesDomain.getBrandId());
         final Mapper<PricesDomain, PricesEntity> mapper = new PricesEntityToDomainMapper();
         return mapper.map(pricesEntity);

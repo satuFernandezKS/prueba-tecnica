@@ -14,7 +14,7 @@ public class PricesEntityToDomainMapper implements Mapper<PricesDomain, PricesEn
         if (entity == null) {
             return Optional.empty();
         }
-        final PricesDomain pricesDomain = new PricesDomain();
+        final var pricesDomain = new PricesDomain();
         pricesDomain.setBrandId(entity.getBrandId());
         pricesDomain.setStartDate(entity.getStartDate());
         pricesDomain.setEndDate(entity.getEndDate());

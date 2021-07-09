@@ -55,22 +55,6 @@ public class PricesEntity {
         this.price = price;
     }
 
-    public PricesEntity(Long id, Integer brandId, LocalDateTime startDate, LocalDateTime endDate, Integer priceList,
-                        Integer productId, Integer priority, Float price, String currency, LocalDateTime lastUpdate,
-                        String lastUpdateBy) {
-        this.id = id;
-        this.brandId = brandId;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.priceList = priceList;
-        this.productId = productId;
-        this.priority = priority;
-        this.price = price;
-        this.currency = currency;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdateBy = lastUpdateBy;
-    }
-
     public Long getId() {
         return id;
     }

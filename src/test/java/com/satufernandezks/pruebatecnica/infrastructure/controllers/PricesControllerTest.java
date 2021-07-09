@@ -1,7 +1,10 @@
-package com.satufernandezks.pruebatecnica.application.controllers;
+package com.satufernandezks.pruebatecnica.infrastructure.controllers;
 
+import com.satufernandezks.pruebatecnica.application.adapters.PricesUseCase;
+import com.satufernandezks.pruebatecnica.application.exceptions.MissingParameterException;
+import com.satufernandezks.pruebatecnica.application.exceptions.NotFoundException;
 import com.satufernandezks.pruebatecnica.domain.data.PricesDomain;
-import com.satufernandezks.pruebatecnica.domain.ports.api.PricesServicePort;
+import com.satufernandezks.pruebatecnica.domain.exceptions.ApplicationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -29,19 +31,20 @@ public class PricesControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private PricesServicePort pricesServicePort;
+    private PricesUseCase pricesUseCase;
 
     @Test
     public void test_fail_applicationDate_param() throws Exception {
 
+        given(pricesUseCase.getPrice(any(PricesDomain.class))).willThrow(MissingParameterException.class);
         mvc.perform(get("/prices/?productId=35455&brandId=1"))
                 .andExpect(status().is4xxClientError());
     }
 
-    @Test(expected = Exception.class)
+    @Test
     public void test_fail_error() throws Exception {
 
-        given(pricesServicePort.getPrice(any(PricesDomain.class))).willThrow(Exception.class);
+        given(pricesUseCase.getPrice(any(PricesDomain.class))).willThrow(ApplicationException.class);
         mvc.perform(get("/prices/?applicationDate=2020-06-14T10:00:00&productId=35455&brandId=1"))
                 .andExpect(status().is5xxServerError());
     }
@@ -62,9 +65,7 @@ public class PricesControllerTest {
         domainRequest.setLastUpdate(LocalDateTime.now());
         domainRequest.setLastUpdateBy("admin");
 
-        Optional<PricesDomain> pricesDomainResult = Optional.of(domainRequest);
-
-        given(pricesServicePort.getPrice(any(PricesDomain.class))).willReturn(pricesDomainResult);
+        given(pricesUseCase.getPrice(any(PricesDomain.class))).willReturn(domainRequest);
 
         mvc.perform(get("/prices/?applicationDate=" + domainRequest.getApplicationDate().toString()
                 + "&productId=" + domainRequest.getProductId()
@@ -81,7 +82,7 @@ public class PricesControllerTest {
         domainRequest.setProductId(35455);
         domainRequest.setBrandId(1);
 
-        given(pricesServicePort.getPrice(any(PricesDomain.class))).willReturn(Optional.empty());
+        given(pricesUseCase.getPrice(any(PricesDomain.class))).willThrow(NotFoundException.class);
 
         mvc.perform(get("/prices/?applicationDate=" + domainRequest.getApplicationDate().toString()
                 + "&productId=" + domainRequest.getProductId()

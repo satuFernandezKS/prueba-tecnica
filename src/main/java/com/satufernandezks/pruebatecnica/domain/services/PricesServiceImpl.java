@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class PricesServiceImpl implements PricesServicePort {
 
-    private PricesPersistencePort pricesPersistencePort;
+    private final PricesPersistencePort pricesPersistencePort;
 
     public PricesServiceImpl(PricesPersistencePort pricesPersistencePort) {
         this.pricesPersistencePort = pricesPersistencePort;

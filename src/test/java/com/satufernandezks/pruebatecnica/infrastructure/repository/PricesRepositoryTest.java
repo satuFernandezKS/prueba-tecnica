@@ -40,8 +40,17 @@ public class PricesRepositoryTest {
     @Test
     public void test_getPrice() {
 
-        PricesEntity pricesEntity = new PricesEntity(null, 1, LocalDateTime.now(), LocalDateTime.now(),
-                1, 35455, 1, 35.50f, "EUR", LocalDateTime.now(), "admin");
+        PricesEntity pricesEntity = new PricesEntity();
+        pricesEntity.setBrandId(1);
+        pricesEntity.setStartDate(LocalDateTime.now());
+        pricesEntity.setEndDate(LocalDateTime.now());
+        pricesEntity.setPriceList(1);
+        pricesEntity.setProductId(35455);
+        pricesEntity.setPriority(1);
+        pricesEntity.setPrice(35.50f);
+        pricesEntity.setCurrency("EUR");
+        pricesEntity.setLastUpdate(LocalDateTime.now());
+        pricesEntity.setLastUpdateBy("admin");
         testEntityManager.persist(pricesEntity);
 
         PricesEntity pricesEntityResult = pricesRepository.getPrice(pricesEntity.getStartDate(),

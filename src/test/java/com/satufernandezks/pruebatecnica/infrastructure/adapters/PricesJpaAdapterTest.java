@@ -16,8 +16,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -48,7 +46,7 @@ public class PricesJpaAdapterTest {
         when(pricesDomain.getApplicationDate()).thenReturn(LocalDateTime.now());
         when(pricesDomain.getProductId()).thenReturn(35455);
         when(pricesDomain.getBrandId()).thenReturn(1);
-        given(pricesRepository.getPrice(pricesDomain.getApplicationDate(),pricesDomain.getProductId(),
+        given(pricesRepository.getPrice(pricesDomain.getApplicationDate(), pricesDomain.getProductId(),
                 pricesDomain.getBrandId())).willReturn(pricesEntity);
 
         final Optional<PricesDomain> pricesDomainResult = pricesPersistencePort.getPrice(pricesDomain);
