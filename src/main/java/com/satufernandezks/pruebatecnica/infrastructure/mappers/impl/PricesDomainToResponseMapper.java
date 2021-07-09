@@ -12,9 +12,9 @@ public class PricesDomainToResponseMapper implements Mapper<PricesResponse, Pric
     public Optional<PricesResponse> map(final PricesDomain domain) {
 
         if (domain == null) {
-            return null;
+            return Optional.empty();
         }
-        final PricesResponse pricesResponse = new PricesResponse();
+        final var pricesResponse = new PricesResponse();
         pricesResponse.setBrandId(domain.getBrandId());
         pricesResponse.setStartDate(domain.getStartDate());
         pricesResponse.setEndDate(domain.getEndDate());

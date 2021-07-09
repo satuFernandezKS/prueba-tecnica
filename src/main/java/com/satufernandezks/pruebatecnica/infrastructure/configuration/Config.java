@@ -1,5 +1,7 @@
 package com.satufernandezks.pruebatecnica.infrastructure.configuration;
 
+import com.satufernandezks.pruebatecnica.application.adapters.PricesUseCase;
+import com.satufernandezks.pruebatecnica.application.adapters.impl.PricesUseCaseImpl;
 import com.satufernandezks.pruebatecnica.domain.ports.api.PricesServicePort;
 import com.satufernandezks.pruebatecnica.domain.ports.spi.PricesPersistencePort;
 import com.satufernandezks.pruebatecnica.domain.services.PricesServiceImpl;
@@ -18,5 +20,10 @@ public class Config {
     @Bean
     public PricesServicePort pricesService() {
         return new PricesServiceImpl(pricesPersistence());
+    }
+
+    @Bean
+    public PricesUseCase pricesUseCase() {
+        return new PricesUseCaseImpl(pricesService());
     }
 }

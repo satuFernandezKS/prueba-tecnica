@@ -4,7 +4,7 @@ public abstract class ViewObject {
 
     protected int status;
 
-    public ViewObject(int status) {
+    protected ViewObject(int status) {
         this.status = status;
     }
 

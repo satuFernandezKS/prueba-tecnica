@@ -4,7 +4,7 @@ import com.satufernandezks.pruebatecnica.infrastructure.entities.PricesEntity;
 
 import java.time.LocalDateTime;
 
-public interface PricesRepository /*extends JpaRepository<PricesEntity, Long>*/ {
+public interface PricesRepository {
 
     PricesEntity getPrice(final LocalDateTime applicationDate,
                           final Integer productId,
