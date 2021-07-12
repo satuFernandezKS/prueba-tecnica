@@ -76,7 +76,7 @@ _Este comando, por defecto, también lanzará las pruebas (tests)_
 * [Spring Boot](https://spring.io/projects/spring-boot)
 * [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
 * [H2 Database](https://www.h2database.com/html/main.html)
-* Arquitectura de patrones y puertos
+* Arquitectura de adaptadores y puertos
 
 ## Autor ✒️
 
